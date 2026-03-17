@@ -77,3 +77,7 @@ val playlist_color = Color(0xFF5ef784)
 val mix_color = Color(0xFFebca89)
 
 val seed = Color(0xFF006eff)
+
+// Web UI specific colors
+val webOnSurface = dark_onSurface
+val webSecondary = dark_secondary
