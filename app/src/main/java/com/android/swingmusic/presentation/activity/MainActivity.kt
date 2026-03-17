@@ -53,6 +53,9 @@ import com.android.swingmusic.auth.presentation.viewmodel.AuthViewModel
 import com.android.swingmusic.folder.presentation.event.FolderUiEvent
 import com.android.swingmusic.folder.presentation.screen.destinations.FoldersAndTracksScreenDestination
 import com.android.swingmusic.folder.presentation.viewmodel.FoldersViewModel
+import com.android.swingmusic.home.presentation.screen.destinations.HomeScreenDestination
+import com.android.swingmusic.library.presentation.screen.destinations.LibraryScreenDestination
+import com.android.swingmusic.lyrics.presentation.screen.destinations.LyricsScreenDestination
 import com.android.swingmusic.player.presentation.screen.MiniPlayer
 import com.android.swingmusic.player.presentation.screen.destinations.NowPlayingScreenDestination
 import com.android.swingmusic.player.presentation.screen.destinations.QueueScreenDestination
@@ -133,37 +136,34 @@ class MainActivity : ComponentActivity() {
                 LoginWithUsernameScreenDestination,
                 LoginWithQrCodeDestination,
                 NowPlayingScreenDestination,
-                QueueScreenDestination
+                QueueScreenDestination,
+                LyricsScreenDestination
             )
 
             val showBottomNav =
                 route != null && newBackStackEntry?.destination() !in hideForDestination
 
             val bottomNavItems: List<BottomNavItem> = listOf(
-                // BottomNavItem.Home,
-                BottomNavItem.Folder,
-                BottomNavItem.Album,
-                // BottomNavItem.Playlist,
-                BottomNavItem.Artist,
+                BottomNavItem.Home,
                 BottomNavItem.Search,
+                BottomNavItem.Library,
             )
 
             // Map of BottomNavItem to their route prefixes
             val bottomNavRoutePrefixes = mapOf(
-                // BottomNavItem.Home to listOf(HomeDestination.route),
-                BottomNavItem.Folder to listOf(FoldersAndTracksScreenDestination.route),
-                BottomNavItem.Album to listOf(
-                    AllAlbumScreenDestination.route,
-                    AlbumWithInfoScreenDestination.route
-                ),
-                BottomNavItem.Artist to listOf(
-                    AllArtistsScreenDestination.route,
-                    ArtistInfoScreenDestination.route,
-                    ViewAllScreenOnArtistDestination.route
-                ),
+                BottomNavItem.Home to listOf(HomeScreenDestination.route),
                 BottomNavItem.Search to listOf(
                     SearchScreenDestination.route,
                     ViewAllSearchResultsDestination.route
+                ),
+                BottomNavItem.Library to listOf(
+                    LibraryScreenDestination.route,
+                    FoldersAndTracksScreenDestination.route,
+                    AllAlbumScreenDestination.route,
+                    AlbumWithInfoScreenDestination.route,
+                    AllArtistsScreenDestination.route,
+                    ArtistInfoScreenDestination.route,
+                    ViewAllScreenOnArtistDestination.route
                 )
             )
 
@@ -202,11 +202,18 @@ class MainActivity : ComponentActivity() {
 
                             if (showBottomNav) {
                                 NavigationBar(
-                                    modifier = Modifier.fillMaxWidth(),
-                                    containerColor = MaterialTheme.colorScheme.inverseOnSurface
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                        .background(
+                                            Color.Transparent
+                                        ),
+                                    containerColor = Color.Transparent,
+                                    contentColor = webOnSurface
                                 ) {
                                     Row(
-                                        modifier = Modifier.fillMaxWidth(),
+                                        modifier = Modifier
+                                            .fillMaxWidth()
+                                            .padding(horizontal = 8.dp, vertical = 4.dp),
                                         horizontalArrangement = Arrangement.Center
                                     ) {
                                         bottomNavItems.forEach { item ->
@@ -214,7 +221,8 @@ class MainActivity : ComponentActivity() {
                                                 icon = {
                                                     Icon(
                                                         painter = painterResource(id = item.icon),
-                                                        contentDescription = null
+                                                        contentDescription = null,
+                                                        modifier = Modifier.size(24.dp)
                                                     )
                                                 },
                                                 selected = navController.currentDestination?.route?.let { route ->
@@ -223,7 +231,17 @@ class MainActivity : ComponentActivity() {
                                                     } == true
                                                 } == true,
                                                 alwaysShowLabel = false,
-                                                label = { Text(text = item.title) },
+                                                label = { 
+                                                    Text(
+                                                        text = item.title,
+                                                        style = MaterialTheme.typography.bodySmall,
+                                                        fontWeight = if (navController.currentDestination?.route?.let { route ->
+                                                            bottomNavRoutePrefixes[item]?.any { prefix ->
+                                                                route.startsWith(prefix)
+                                                            } == true
+                                                        } == true) FontWeight.Bold else FontWeight.Normal
+                                                    )
+                                                },
                                                 onClick = {
                                                     // Whatever you do, DON'T TOUCH this
                                                     if (navController.currentDestination?.route != item.destination.route) {

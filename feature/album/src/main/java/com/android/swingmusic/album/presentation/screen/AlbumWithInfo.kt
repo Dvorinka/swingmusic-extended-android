@@ -129,6 +129,12 @@ fun AlbumWithInfo(
     val isDarkTheme = isSystemInDarkTheme()
     val versionContainerColor = if (isDarkTheme) Color(0x26DACC32) else Color(0x3D744F00)
     val versionTextColor = if (isDarkTheme) Color(0xFFDACC32) else Color(0xFF744E00)
+    
+    // Web UI matching colors
+    val webPrimary = Color(0xFF006eff)
+    val webSurface = Color(0xFF1a1919)
+    val webOnSurface = Color(0xFFffffffde)
+    val webSecondary = Color(0xFF8e8e93)
 
     val interaction = remember { MutableInteractionSource() }
     val listState = rememberLazyListState()
@@ -203,7 +209,7 @@ fun AlbumWithInfo(
         LazyColumn(
             modifier = Modifier
                 .fillMaxSize()
-                .background(MaterialTheme.colorScheme.surface),
+                .background(webSurface),
             state = listState,
         ) {
             item {
@@ -305,8 +311,11 @@ fun AlbumWithInfo(
                                 bottom = 2.dp
                             ),
                             text = albumInfo.title,
-                            style = MaterialTheme.typography.titleLarge,
-                            maxLines = 1,
+                            style = MaterialTheme.typography.titleLarge.copy(
+                                fontWeight = FontWeight.Bold,
+                                color = webOnSurface
+                            ),
+                            maxLines = 2,
                             overflow = TextOverflow.Ellipsis
                         )
 
@@ -317,9 +326,10 @@ fun AlbumWithInfo(
                             item {
                                 Text(
                                     text = albumInfo.type.replaceFirstChar { it.uppercase() },
-                                    style = MaterialTheme.typography.bodyMedium,
-                                    fontWeight = FontWeight.SemiBold,
-                                    color = MaterialTheme.colorScheme.onSurface.copy(alpha = .75F),
+                                    style = MaterialTheme.typography.bodyMedium.copy(
+                                        fontWeight = FontWeight.SemiBold,
+                                        color = webSecondary
+                                    ),
                                     maxLines = 1,
                                     overflow = TextOverflow.Ellipsis
                                 )
@@ -329,9 +339,7 @@ fun AlbumWithInfo(
                                         .padding(8.dp)
                                         .size(4.dp)
                                         .clip(CircleShape)
-                                        .background(
-                                            MaterialTheme.colorScheme.onSurface.copy(alpha = .75F)
-                                        )
+                                        .background(webSecondary)
                                 )
                             }
 
@@ -344,9 +352,10 @@ fun AlbumWithInfo(
                                         onClickArtist(artist.artistHash)
                                     },
                                     text = artist.name,
-                                    style = MaterialTheme.typography.bodyMedium,
-                                    fontWeight = FontWeight.SemiBold,
-                                    color = MaterialTheme.colorScheme.onSurface.copy(alpha = .75F),
+                                    style = MaterialTheme.typography.bodyMedium.copy(
+                                        fontWeight = FontWeight.SemiBold,
+                                        color = webSecondary
+                                    ),
                                     maxLines = 1,
                                     overflow = TextOverflow.Ellipsis
                                 )
@@ -367,9 +376,10 @@ fun AlbumWithInfo(
                             item {
                                 Text(
                                     text = albumInfo.date.formatDate("yyyy"),
-                                    style = MaterialTheme.typography.bodySmall,
-                                    fontWeight = FontWeight.Normal,
-                                    color = MaterialTheme.colorScheme.onSurface.copy(alpha = .75F),
+                                    style = MaterialTheme.typography.bodySmall.copy(
+                                        fontWeight = FontWeight.Medium,
+                                        color = webSecondary
+                                    ),
                                     maxLines = 1,
                                     overflow = TextOverflow.Ellipsis
                                 )
@@ -442,14 +452,14 @@ fun AlbumWithInfo(
                                 IconButton(
                                     modifier = Modifier
                                         .clip(RoundedCornerShape(32))
-                                        .background(MaterialTheme.colorScheme.primary),
+                                        .background(webPrimary),
                                     onClick = {
                                         onPlay(sortedTracks)
                                     }
                                 ) {
                                     Icon(
                                         painter = painterResource(id = R.drawable.play_arrow_fill),
-                                        tint = MaterialTheme.colorScheme.onPrimary,
+                                        tint = Color.White,
                                         contentDescription = "Play Icon"
                                     )
                                 }

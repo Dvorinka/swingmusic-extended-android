@@ -61,6 +61,13 @@ fun TrackItem(
     baseUrl: String
 ) {
     val interaction = remember { MutableInteractionSource() }
+    
+    // Web UI matching colors
+    val webSurface = Color(0xFF1a1919)
+    val webOnSurface = Color(0xFFffffffde)
+    val webSecondary = Color(0xFF8e8e93)
+    val webHighlight = Color(0xFF006eff)
+    val webHover = Color(0xFF2c2c2e)
 
     Box(
         modifier = Modifier
@@ -73,7 +80,7 @@ fun TrackItem(
             modifier = Modifier
                 .background(
                     color = if (isCurrentTrack)
-                        MaterialTheme.colorScheme.onSurface.copy(alpha = .14F) else
+                        webHighlight.copy(alpha = .14F) else
                         Color.Unspecified
                 )
                 .clickable(
@@ -107,8 +114,10 @@ fun TrackItem(
                                 // Single line for 1-3 digit numbers (1-999)
                                 Text(
                                     text = trackNumberStr,
-                                    style = MaterialTheme.typography.bodySmall,
-                                    color = MaterialTheme.colorScheme.onSurface,
+                                    style = MaterialTheme.typography.bodySmall.copy(
+                                        color = webSecondary,
+                                        fontWeight = FontWeight.Medium
+                                    ),
                                     textAlign = TextAlign.End
                                 )
                             } else {
@@ -118,14 +127,18 @@ fun TrackItem(
                                 ) {
                                     Text(
                                         text = trackNumberStr.take(3),
-                                        style = MaterialTheme.typography.bodySmall,
-                                        color = MaterialTheme.colorScheme.onSurface,
+                                        style = MaterialTheme.typography.bodySmall.copy(
+                                            color = webSecondary,
+                                            fontWeight = FontWeight.Medium
+                                        ),
                                         textAlign = TextAlign.End
                                     )
                                     Text(
                                         text = trackNumberStr.drop(3),
-                                        style = MaterialTheme.typography.bodySmall,
-                                        color = MaterialTheme.colorScheme.onSurface,
+                                        style = MaterialTheme.typography.bodySmall.copy(
+                                            color = webSecondary,
+                                            fontWeight = FontWeight.Medium
+                                        ),
                                         textAlign = TextAlign.End
                                     )
                                 }
@@ -170,7 +183,10 @@ fun TrackItem(
                 ) {
                     Text(
                         text = track.title,
-                        color = MaterialTheme.colorScheme.onSurface,
+                        color = webOnSurface,
+                        style = MaterialTheme.typography.bodyMedium.copy(
+                            fontWeight = FontWeight.Medium
+                        ),
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis
                     )
@@ -185,8 +201,10 @@ fun TrackItem(
                         Text(
                             text = artistsJoined,
                             modifier = Modifier.weight(1f, fill = false),
-                            color = MaterialTheme.colorScheme.onSurface.copy(alpha = .84F),
-                            style = MaterialTheme.typography.bodySmall,
+                            color = webSecondary,
+                            style = MaterialTheme.typography.bodySmall.copy(
+                                fontWeight = FontWeight.Normal
+                            ),
                             maxLines = 1,
                             overflow = TextOverflow.Ellipsis
                         )
@@ -197,15 +215,15 @@ fun TrackItem(
                                 .padding(horizontal = 8.dp)
                                 .clip(CircleShape)
                                 .size(3.dp)
-                                .background(
-                                    MaterialTheme.colorScheme.onSurface.copy(alpha = .50F)
-                                )
+                                .background(webSecondary)
                         )
 
                         Text(
                             text = track.duration.formatDuration(),
-                            color = MaterialTheme.colorScheme.onSurface.copy(alpha = .84F),
-                            style = MaterialTheme.typography.bodySmall
+                            color = webSecondary,
+                            style = MaterialTheme.typography.bodySmall.copy(
+                                fontWeight = FontWeight.Normal
+                            )
                         )
                     }
                 }

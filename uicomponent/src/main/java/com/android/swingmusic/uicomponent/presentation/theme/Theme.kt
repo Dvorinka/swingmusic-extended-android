@@ -83,17 +83,13 @@ private val darkColorScheme = darkColorScheme(
 
 @Composable
 fun SwingMusicTheme(
-    darkTheme: Boolean = isSystemInDarkTheme(),
-    dynamicColor: Boolean = true,
+    darkTheme: Boolean = true, // Default to dark theme to match web UI
+    dynamicColor: Boolean = false, // Disable dynamic colors to maintain consistency
     navBarColor: Color? = null,
     content: @Composable () -> Unit
 ) {
     val colorScheme = when {
-        dynamicColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S -> {
-            val context = LocalContext.current
-            if (darkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
-        }
-
+        // Always use our custom dark color scheme to match web UI
         darkTheme -> darkColorScheme
         else -> lightColorScheme
     }

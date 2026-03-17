@@ -62,6 +62,10 @@ fun AlbumItem(
 
     val versionContainerColor = if (isDarkTheme) Color(0x26DACC32) else Color(0x3D744F00)
     val versionTextColor = if (isDarkTheme) Color(0xFFDACC32) else Color(0xFF744E00)
+    
+    // Web UI matching colors
+    val webOnSurface = Color(0xFFffffffde)
+    val webSecondary = Color(0xFF8e8e93)
 
     val otherAlbumArtists: String? = remember {
         album.albumArtists
@@ -108,8 +112,10 @@ fun AlbumItem(
                 text = album.helpText,
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis,
-                style = MaterialTheme.typography.bodySmall,
-                color = MaterialTheme.colorScheme.onSurface.copy(alpha = .75F)
+                style = MaterialTheme.typography.bodySmall.copy(
+                    fontWeight = FontWeight.Medium,
+                    color = webSecondary
+                )
             )
         }
 
@@ -120,7 +126,9 @@ fun AlbumItem(
             maxLines = 1,
             overflow = TextOverflow.Ellipsis,
             fontWeight = FontWeight.SemiBold,
-            style = MaterialTheme.typography.bodyMedium,
+            style = MaterialTheme.typography.bodyMedium.copy(
+                color = webOnSurface
+            ),
         )
 
         if (screen != Screen.ARTIST) {
@@ -131,8 +139,10 @@ fun AlbumItem(
                     text = album.albumArtists[0].name,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis,
-                    style = MaterialTheme.typography.bodySmall,
-                    color = MaterialTheme.colorScheme.onSurface.copy(alpha = .75F)
+                    style = MaterialTheme.typography.bodySmall.copy(
+                        fontWeight = FontWeight.Normal,
+                        color = webSecondary
+                    )
                 )
             }
         } else {
@@ -146,8 +156,10 @@ fun AlbumItem(
                         text = album.date.toLong().formatDate("yyyy"),
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis,
-                        style = MaterialTheme.typography.bodySmall,
-                        color = MaterialTheme.colorScheme.onSurface.copy(alpha = .75F)
+                        style = MaterialTheme.typography.bodySmall.copy(
+                            fontWeight = FontWeight.Normal,
+                            color = webSecondary
+                        )
                     )
                 }
 
@@ -158,7 +170,7 @@ fun AlbumItem(
                                 .padding(horizontal = 8.dp)
                                 .size(4.dp)
                                 .clip(CircleShape)
-                                .background(MaterialTheme.colorScheme.onSurface.copy(alpha = .5F))
+                                .background(webSecondary)
                         )
                     }
 
@@ -166,8 +178,10 @@ fun AlbumItem(
                         text = otherAlbumArtists ?: "",
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis,
-                        style = MaterialTheme.typography.bodySmall,
-                        color = MaterialTheme.colorScheme.onSurface.copy(alpha = .75F)
+                        style = MaterialTheme.typography.bodySmall.copy(
+                            fontWeight = FontWeight.Normal,
+                            color = webSecondary
+                        )
                     )
                 }
             }

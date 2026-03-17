@@ -1,8 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="Theme.SwingMusic" parent="android:Theme.Material.Light.NoActionBar">
-        <item name="android:windowBackground">@color/splash_background</item>
+    <style name="Theme.SwingMusic" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Primary Colors -->
+        <item name="colorPrimary">@color/highlight_blue</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorPrimaryContainer">@color/darkest_blue</item>
+        <item name="colorOnPrimaryContainer">@color/white</item>
+        
+        <!-- Secondary Colors -->
+        <item name="colorSecondary">@color/secondary_text</item>
+        <item name="colorOnSecondary">@color/primary_background</item>
+        <item name="colorSecondaryContainer">@color/card_background</item>
+        <item name="colorOnSecondaryContainer">@color/primary_text</item>
+        
+        <!-- Surface Colors -->
+        <item name="android:windowBackground">@color/primary_background</item>
+        <item name="colorSurface">@color/surface_background</item>
+        <item name="colorOnSurface">@color/primary_text</item>
+        <item name="colorSurfaceVariant">@color/card_background</item>
+        <item name="colorOnSurfaceVariant">@color/secondary_text</item>
+        
+        <!-- Status Bar -->
         <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:windowLightStatusBar">false</item>
+        
+        <!-- Navigation Bar -->
+        <item name="android:navigationBarColor">@color/bottom_controls_background</item>
+        <item name="android:windowLightNavigationBar">false</item>
+        
+        <!-- Ripple Effect -->
+        <item name="colorControlHighlight">@color/ripple_effect</item>
+        
+        <!-- Remove elevation overlays for dark theme -->
+        <item name="android:colorBackground">@color/primary_background</item>
     </style>
 </resources>

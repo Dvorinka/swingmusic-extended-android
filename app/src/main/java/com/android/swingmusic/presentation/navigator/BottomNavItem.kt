@@ -5,6 +5,8 @@ import com.android.swingmusic.album.presentation.screen.destinations.AllAlbumScr
 import com.android.swingmusic.artist.presentation.screen.destinations.AllArtistsScreenDestination
 import com.android.swingmusic.folder.presentation.screen.destinations.FoldersAndTracksScreenDestination
 import com.android.swingmusic.search.presentation.screen.destinations.SearchScreenDestination
+import com.android.swingmusic.home.presentation.screen.destinations.HomeScreenDestination
+import com.android.swingmusic.library.presentation.screen.destinations.LibraryScreenDestination
 import com.ramcosta.composedestinations.spec.DestinationSpec
 import com.android.swingmusic.uicomponent.R as UiComponent
 
@@ -13,6 +15,25 @@ sealed class BottomNavItem(
     @param:DrawableRes var icon: Int,
     var destination: DestinationSpec<*>
 ) {
+    data object Home : BottomNavItem(
+        title = "Home",
+        icon = UiComponent.drawable.ic_home,
+        destination = HomeScreenDestination
+    )
+
+    data object Search : BottomNavItem(
+        title = "Search",
+        icon = UiComponent.drawable.ic_search,
+        destination = SearchScreenDestination
+    )
+
+    data object Library : BottomNavItem(
+        title = "Library",
+        icon = UiComponent.drawable.ic_library,
+        destination = LibraryScreenDestination
+    )
+
+    // Legacy items - can be accessed through Library
     data object Folder : BottomNavItem(
         title = "Folders",
         icon = UiComponent.drawable.folder_filled,
@@ -29,11 +50,5 @@ sealed class BottomNavItem(
         title = "Artists",
         icon = UiComponent.drawable.ic_artist,
         destination = AllArtistsScreenDestination
-    )
-
-    data object Search : BottomNavItem(
-        title = "Search",
-        icon = UiComponent.drawable.ic_search,
-        destination = SearchScreenDestination
     )
 }

@@ -1,6 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="splash_background">#262626</color>
+    <!-- Swing Music Web UI Color Palette -->
+    <color name="splash_background">#181a1c</color>
+    
+    <!-- Primary Colors -->
+    <color name="primary_background">#181a1c</color>
+    <color name="surface_background">#1a1919</color>
+    <color name="card_background">#2c2c2e</color>
+    <color name="bottom_controls_background">#161616</color>
+    
+    <!-- Text Colors -->
+    <color name="primary_text">#ffffffde</color>
+    <color name="secondary_text">#8e8e93</color>
+    <color name="tertiary_text">#636366</color>
+    <color name="quaternary_text">#48484a</color>
+    <color name="disabled_text">#3a3a3c</color>
+    
+    <!-- Accent Colors -->
+    <color name="highlight_blue">#006eff</color>
+    <color name="darkest_blue">#234ece</color>
+    <color name="blue">#0a84ff</color>
+    <color name="darkblue">#055ee2</color>
+    
+    <!-- Status Colors -->
+    <color name="red">#f7635c</color>
+    <color name="green">#5ef784</color>
+    <color name="yellow">#ffd60a</color>
+    <color name="orange">#ff9f0a</color>
+    <color name="pink">#ff375f</color>
+    <color name="purple">#bf5af2</color>
+    <color name="indigo">#5e5ce6</color>
+    <color name="teal">#40c8e0</color>
+    <color name="brown">#ac8e68</color>
+    <color name="lightbrown">#ebca89</color>
+    
+    <!-- Content Type Colors (matching web UI rhelp classes) -->
+    <color name="artist_color">#ff375f</color>
+    <color name="album_color">#ff9f0a</color>
+    <color name="track_color">#ff375f</color>
+    <color name="folder_color">#40c8e0</color>
+    <color name="playlist_color">#5ef784</color>
+    <color name="mix_color">#ebca89</color>
+    
+    <!-- UI Elements -->
+    <color name="separator">#3a3a3c</color>
+    <color name="hover_background">#2c2c2e</color>
+    <color name="ripple_effect">#ffffff20</color>
+    
+    <!-- Default Android Colors (keeping for compatibility) -->
     <color name="purple_200">#FFBB86FC</color>
     <color name="purple_500">#FF6200EE</color>
     <color name="purple_700">#FF3700B3</color>
