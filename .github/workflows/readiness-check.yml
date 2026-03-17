@@ -258,7 +258,7 @@ jobs:
         echo "📄 Readiness report generated"
         
     - name: Upload readiness report
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: readiness-report
         path: readiness-report.md
