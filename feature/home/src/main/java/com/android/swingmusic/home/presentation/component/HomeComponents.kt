@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -41,6 +42,7 @@ import coil.request.ImageRequest
 import com.android.swingmusic.core.domain.model.Album
 import com.android.swingmusic.core.domain.model.Artist
 import com.android.swingmusic.core.domain.model.Track
+import com.android.swingmusic.home.domain.model.HomeStats
 import com.android.swingmusic.uicomponent.R
 import com.android.swingmusic.uicomponent.presentation.theme.album_color
 import com.android.swingmusic.uicomponent.presentation.theme.artist_color
@@ -230,9 +232,9 @@ fun RecentlyAddedSection(
 fun QuickActionsSection() {
     val actions = listOf(
         QuickAction("Shuffle All", R.drawable.shuffle, playlist_color) { /* Shuffle all */ },
-        QuickAction("Daily Mix", R.drawable.ic_mix, album_color) { /* Open daily mix */ },
+        QuickAction("Daily Mix", R.drawable.play_list, album_color) { /* Open daily mix */ },
         QuickAction("Favorites", R.drawable.fav_not_filled, artist_color) { /* Open favorites */ },
-        QuickAction("Statistics", R.drawable.ic_stats, webSecondary) { /* Open stats */ }
+        QuickAction("Statistics", R.drawable.grid, webSecondary) { /* Open stats */ }
     )
     
     Column(

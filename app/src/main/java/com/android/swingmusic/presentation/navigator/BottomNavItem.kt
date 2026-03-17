@@ -7,6 +7,7 @@ import com.android.swingmusic.folder.presentation.screen.destinations.FoldersAnd
 import com.android.swingmusic.search.presentation.screen.destinations.SearchScreenDestination
 import com.android.swingmusic.home.presentation.screen.destinations.HomeScreenDestination
 import com.android.swingmusic.library.presentation.screen.destinations.LibraryScreenDestination
+import com.android.swingmusic.download.presentation.screen.destinations.DownloadScreenDestination
 import com.ramcosta.composedestinations.spec.DestinationSpec
 import com.android.swingmusic.uicomponent.R as UiComponent
 
@@ -28,9 +29,15 @@ sealed class BottomNavItem(
     )
 
     data object Library : BottomNavItem(
-        title = "Library",
+        title = "Your Library",
         icon = UiComponent.drawable.ic_library,
         destination = LibraryScreenDestination
+    )
+
+    data object Downloads : BottomNavItem(
+        title = "Downloads",
+        icon = UiComponent.drawable.ic_download,
+        destination = DownloadScreenDestination
     )
 
     // Legacy items - can be accessed through Library

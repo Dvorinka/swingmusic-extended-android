@@ -1,6 +1,6 @@
 package com.android.swingmusic.home.presentation.state
 
-import com.android.swingmusic.home.domain.usecase.HomeData
+import com.android.swingmusic.home.domain.model.HomeData
 
 data class HomeUiState(
     val homeData: HomeData? = null,
@@ -13,8 +13,8 @@ sealed class HomeUiEvent {
     data class NavigateToAlbum(val albumHash: String) : HomeUiEvent()
     data class NavigateToArtist(val artistHash: String) : HomeUiEvent()
     data class NavigateToPlaylist(val playlistId: String) : HomeUiEvent()
-    data class NavigateToFavorites : HomeUiEvent()
-    data class NavigateToSettings : HomeUiEvent()
-    data class ShuffleAll : HomeUiEvent()
-    data class PlayDailyMix : HomeUiEvent()
+    object NavigateToFavorites : HomeUiEvent()
+    object NavigateToSettings : HomeUiEvent()
+    object ShuffleAll : HomeUiEvent()
+    object PlayDailyMix : HomeUiEvent()
 }

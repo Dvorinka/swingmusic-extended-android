@@ -24,7 +24,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Surface
+import androidx.compose.material3.BadgedBox
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -67,7 +67,7 @@ import com.android.swingmusic.presentation.navigator.scaleInEnterTransition
 import com.android.swingmusic.presentation.navigator.scaleInPopEnterTransition
 import com.android.swingmusic.presentation.navigator.scaleOutExitTransition
 import com.android.swingmusic.presentation.navigator.scaleOutPopExitTransition
-import com.android.swingmusic.search.presentation.event.SearchUiEvent
+import com.android.swingmusic.download.presentation.screen.destinations.DownloadScreenDestination
 import com.android.swingmusic.search.presentation.screen.destinations.SearchScreenDestination
 import com.android.swingmusic.search.presentation.screen.destinations.ViewAllSearchResultsDestination
 import com.android.swingmusic.search.presentation.viewmodel.SearchViewModel
@@ -147,6 +147,7 @@ class MainActivity : ComponentActivity() {
                 BottomNavItem.Home,
                 BottomNavItem.Search,
                 BottomNavItem.Library,
+                BottomNavItem.Downloads,
             )
 
             // Map of BottomNavItem to their route prefixes
@@ -164,6 +165,9 @@ class MainActivity : ComponentActivity() {
                     AllArtistsScreenDestination.route,
                     ArtistInfoScreenDestination.route,
                     ViewAllScreenOnArtistDestination.route
+                ),
+                BottomNavItem.Downloads to listOf(
+                    DownloadScreenDestination.route
                 )
             )
 
@@ -201,47 +205,59 @@ class MainActivity : ComponentActivity() {
                             }
 
                             if (showBottomNav) {
-                                NavigationBar(
-                                    modifier = Modifier
-                                        .fillMaxWidth()
-                                        .background(
-                                            Color.Transparent
-                                        ),
-                                    containerColor = Color.Transparent,
-                                    contentColor = webOnSurface
+                                Surface(
+                                    modifier = Modifier.fillMaxWidth(),
+                                    shadowElevation = 8.dp,
+                                    tonalElevation = 0.dp
                                 ) {
-                                    Row(
-                                        modifier = Modifier
-                                            .fillMaxWidth()
-                                            .padding(horizontal = 8.dp, vertical = 4.dp),
-                                        horizontalArrangement = Arrangement.Center
+                                    NavigationBar(
+                                        modifier = Modifier.fillMaxWidth(),
+                                        containerColor = MaterialTheme.colorScheme.surface,
+                                        contentColor = MaterialTheme.colorScheme.onSurface
                                     ) {
                                         bottomNavItems.forEach { item ->
                                             NavigationBarItem(
                                                 icon = {
-                                                    Icon(
-                                                        painter = painterResource(id = item.icon),
-                                                        contentDescription = null,
-                                                        modifier = Modifier.size(24.dp)
-                                                    )
+                                                    BadgedBox(
+                                                        badge = {
+                                                            // Show download badge if there are active downloads
+                                                            if (item == BottomNavItem.Downloads) {
+                                                                // TODO: Add download count badge
+                                                            }
+                                                        }
+                                                    ) {
+                                                        Icon(
+                                                            painter = painterResource(id = item.icon),
+                                                            contentDescription = null,
+                                                            modifier = Modifier.size(24.dp)
+                                                        )
+                                                    }
                                                 },
                                                 selected = navController.currentDestination?.route?.let { route ->
                                                     bottomNavRoutePrefixes[item]?.any { prefix ->
                                                         route.startsWith(prefix)
                                                     } == true
                                                 } == true,
-                                                alwaysShowLabel = false,
+                                                alwaysShowLabel = true,
                                                 label = { 
                                                     Text(
                                                         text = item.title,
-                                                        style = MaterialTheme.typography.bodySmall,
+                                                        style = MaterialTheme.typography.caption,
                                                         fontWeight = if (navController.currentDestination?.route?.let { route ->
                                                             bottomNavRoutePrefixes[item]?.any { prefix ->
                                                                 route.startsWith(prefix)
                                                             } == true
-                                                        } == true) FontWeight.Bold else FontWeight.Normal
+                                                        } == true) FontWeight.Bold else FontWeight.Normal,
+                                                        maxLines = 1
                                                     )
                                                 },
+                                                colors = NavigationBarItemDefaults.colors(
+                                                    selectedIconColor = MaterialTheme.colorScheme.primary,
+                                                    selectedTextColor = MaterialTheme.colorScheme.primary,
+                                                    unselectedIconColor = MaterialTheme.colorScheme.onSurfaceVariant,
+                                                    unselectedTextColor = MaterialTheme.colorScheme.onSurfaceVariant,
+                                                    indicatorColor = MaterialTheme.colorScheme.primaryContainer
+                                                ),
                                                 onClick = {
                                                     // Whatever you do, DON'T TOUCH this
                                                     if (navController.currentDestination?.route != item.destination.route) {

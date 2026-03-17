@@ -22,6 +22,13 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
         
+    - name: Set up Android SDK
+      uses: android-actions/setup-android@v2
+      with:
+        api-level: 34
+        build-tools: 34.0.0
+        ndk: 25.1.8937393
+        
     - name: Cache Gradle packages
       uses: actions/cache@v3
       with:

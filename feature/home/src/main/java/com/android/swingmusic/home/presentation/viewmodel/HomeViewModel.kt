@@ -46,6 +46,9 @@ class HomeViewModel @Inject constructor(
             is HomeUiEvent.NavigateToSettings -> {
                 // Handle navigation to settings
             }
+            is HomeUiEvent.PlayDailyMix -> {
+                // Handle play daily mix
+            }
         }
     }
 

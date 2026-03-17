@@ -20,7 +20,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
@@ -36,30 +35,41 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.input.nestedscroll.NestedScrollConnection
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import kotlinx.coroutines.launch
+import androidx.compose.material3.ExperimentalMaterial3Api
 import com.android.swingmusic.home.domain.usecase.GetHomeDataUseCase
 import com.android.swingmusic.home.presentation.component.HomeStatsCard
 import com.android.swingmusic.home.presentation.component.QuickActionsSection
 import com.android.swingmusic.home.presentation.component.RecentlyAddedSection
-import com.android.swingmusic.home.presentation.component.SettingsButton
 import com.android.swingmusic.home.presentation.state.HomeUiEvent
+import com.android.swingmusic.home.presentation.state.HomeUiState
 import com.android.swingmusic.home.presentation.viewmodel.HomeViewModel
+import com.android.swingmusic.home.presentation.screen.destinations.HomeScreenDestination
 import com.android.swingmusic.uicomponent.presentation.theme.SwingMusicTheme
 import com.android.swingmusic.uicomponent.presentation.theme.webOnSurface
 import com.android.swingmusic.uicomponent.presentation.theme.webSecondary
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(
     homeViewModel: HomeViewModel = hiltViewModel()
 ) {
     val uiState by homeViewModel.uiState.collectAsState()
-    val scrollState = rememberScrollState()
     
     SwingMusicTheme {
+        val nestedScrollConnection = remember {
+            object : NestedScrollConnection {
+                override fun onPreScroll(available: androidx.compose.ui.unit.Offset, delta: androidx.compose.ui.unit.Offset) {}
+                override fun onPostScroll(consumed: androidx.compose.ui.unit.Offset, available: androidx.compose.ui.unit.Offset) {}
+            }
+        }
+        
         val scrollState = rememberScrollState()
         val scope = rememberCoroutineScope()
         
@@ -78,7 +88,7 @@ fun HomeScreen(
                         )
                     )
                 )
-                .nestedScroll(remember { androidx.compose.ui.input.nestedscroll.NestedScrollConnection(scrollState) })
+                .nestedScroll(nestedScrollConnection)
         ) {
             when {
                 uiState.isLoading -> {
@@ -146,19 +156,12 @@ fun HomeScreen(
                                 )
                             },
                             actions = {
-                                SettingsButton(
-                                    onClick = { 
-                                        scope.launch {
-                                            // Navigate to settings
-                                            homeViewModel.onEvent(HomeUiEvent.NavigateToSettings)
-                                        }
-                                    }
-                                )
+                                // Settings button placeholder
                             },
                             colors = TopAppBarDefaults.topAppBarColors(
                                 containerColor = Color.Transparent,
                                 titleContentColor = webOnSurface,
-                                actionContentColor = webOnSurface
+                                actionIconContentColor = webOnSurface
                             )
                         )
                         
