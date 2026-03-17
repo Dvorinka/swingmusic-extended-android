@@ -2,6 +2,7 @@ package com.android.swingmusic.core.data.dto
 
 import com.android.swingmusic.core.domain.model.LyricsLine
 import com.android.swingmusic.core.domain.model.LyricsResponse
+import com.android.swingmusic.core.domain.model.LyricsWord
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 import com.squareup.moshi.JsonQualifier
