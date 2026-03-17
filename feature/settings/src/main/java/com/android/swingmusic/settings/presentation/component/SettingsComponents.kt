@@ -218,7 +218,7 @@ fun SettingsItem(
                             value = newValue
                             onValueChange(item.key, newValue)
                         },
-                        modifier = Modifier.fillMaxWidth()
+                        modifier = Modifier.fillMaxWidth(),
                         singleLine = true
                     )
                 }
