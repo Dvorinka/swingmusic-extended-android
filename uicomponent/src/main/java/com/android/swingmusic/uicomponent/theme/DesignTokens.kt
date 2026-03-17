@@ -14,6 +14,8 @@ object SwingMusicColors {
     val Primary = Color(0xFF6366F1) // Indigo
     val PrimaryVariant = Color(0xFF4F46E5) // Darker Indigo
     val OnPrimary = Color(0xFFFFFFFF) // White
+    val PrimaryContainer = Color(0xFF4F46E5) // Darker Indigo
+    val OnPrimaryContainer = Color(0xFFFFFFFF) // White
     
     // Secondary Colors
     val Secondary = Color(0xFF8B5CF6) // Light Blue

@@ -1,6 +1,8 @@
 package com.android.swingmusic.uicomponent.components
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
@@ -33,7 +35,7 @@ fun SwingMusicCard(
     Card(
         modifier = modifier
             .fillMaxWidth()
-            .clip(RoundedCornerShape(SwingMusicShapes.CornerLarge)),
+            .clip(RoundedCornerShape(12.dp)),
         colors = CardDefaults.cardColors(
             containerColor = backgroundColor,
             contentColor = contentColor
@@ -129,7 +131,7 @@ fun SwingMusicButton(
             .height(48.dp),
         colors = colors,
         enabled = enabled && !loading,
-        shape = RoundedCornerShape(SwingMusicShapes.CornerMedium)
+        shape = RoundedCornerShape(8.dp)
     ) {
         if (loading) {
             CircularProgressIndicator(
@@ -139,9 +141,8 @@ fun SwingMusicButton(
             )
         } else {
             Row(
-                horizontalArrangement = Arrangement.Center,
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalGap = SwingMusicSpacing.SM
+                horizontalArrangement = Arrangement.spacedBy(8.dp),
+                verticalAlignment = Alignment.CenterVertically
             ) {
                 icon?.let {
                     Icon(
@@ -204,7 +205,7 @@ fun SwingMusicTextField(
             },
             isError = isError,
             enabled = enabled,
-            shape = RoundedCornerShape(SwingMusicShapes.CornerMedium),
+            shape = RoundedCornerShape(8.dp),
             colors = OutlinedTextFieldDefaults.colors(
                 focusedBorderColor = SwingMusicColors.Primary,
                 unfocusedBorderColor = SwingMusicColors.Border,
@@ -261,11 +262,11 @@ fun SwingMusicProgressIndicator(
         }
         
         LinearProgressIndicator(
-            progress = progress,
+            progress = { progress },
             modifier = Modifier
                 .fillMaxWidth()
                 .height(6.dp)
-                .clip(RoundedCornerShape(SwingMusicShapes.CornerFull)),
+                .clip(RoundedCornerShape(50)),
             color = SwingMusicColors.Primary,
             trackColor = SwingMusicColors.SurfaceVariant,
         )
@@ -294,7 +295,7 @@ fun SwingMusicChip(
     }
     
     val border = when (variant) {
-        ChipVariant.Outline -> BorderStroke(1.dp, SwingMusicColors.Border)
+        ChipVariant.Outline -> androidx.compose.foundation.BorderStroke(1.dp, SwingMusicColors.Border)
         else -> null
     }
     
@@ -318,14 +319,9 @@ fun SwingMusicChip(
             }
         },
         modifier = modifier,
-        colors = FilterChipDefaults.filterChipColors(
-            selectedContainerColor = backgroundColor,
-            selectedLabelColor = contentColor,
-            unselectedContainerColor = backgroundColor,
-            unselectedLabelColor = contentColor
-        ),
+        colors = FilterChipDefaults.filterChipColors(),
         border = border,
-        shape = RoundedCornerShape(SwingMusicShapes.CornerFull)
+        shape = RoundedCornerShape(50)
     )
 }
 
@@ -342,9 +338,9 @@ fun SwingMusicListItem(
     Row(
         modifier = modifier
             .fillMaxWidth()
-            .clip(RoundedCornerShape(SwingMusicShapes.CornerMedium))
+            .clip(RoundedCornerShape(8.dp))
             .background(
-                if (selected) SwingMusicColors.PrimaryContainer else Color.Transparent
+                if (selected) SwingMusicColors.PrimaryVariant else Color.Transparent
             )
             .padding(SwingMusicSpacing.MD)
             .let { if (onClick != null) it.clickable { onClick() } else it },
@@ -374,7 +370,7 @@ fun SwingMusicListItem(
                 Text(
                     text = it,
                     style = SwingMusicTypography.BodySmall,
-                    color = if (selected) SwingMusicColors.OnPrimaryContainer else SwingMusicColors.OnSurfaceVariant,
+                    color = if (selected) SwingMusicColors.OnPrimary else SwingMusicColors.OnSurfaceVariant,
                     modifier = Modifier.padding(top = SwingMusicSpacing.XS)
                 )
             }
@@ -402,7 +398,7 @@ fun SwingMusicGradientCard(
     Card(
         modifier = modifier
             .fillMaxWidth()
-            .clip(RoundedCornerShape(SwingMusicShapes.CornerLarge))
+            .clip(RoundedCornerShape(12.dp))
             .background(
                 Brush.horizontalGradient(gradientColors)
             ),
