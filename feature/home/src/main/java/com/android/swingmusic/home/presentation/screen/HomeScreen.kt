@@ -36,7 +36,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.nestedscroll.NestedScrollConnection
+import androidx.compose.ui.input.nestedscroll.NestedScrollSource
 import androidx.compose.ui.input.nestedscroll.nestedScroll
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -65,8 +67,12 @@ fun HomeScreen(
     SwingMusicTheme {
         val nestedScrollConnection = remember {
             object : NestedScrollConnection {
-                override fun onPreScroll(available: androidx.compose.ui.unit.Offset, delta: androidx.compose.ui.unit.Offset) {}
-                override fun onPostScroll(consumed: androidx.compose.ui.unit.Offset, available: androidx.compose.ui.unit.Offset) {}
+                override fun onPreScroll(available: Offset, source: NestedScrollSource): Offset {
+                    return Offset.Zero
+                }
+                override fun onPostScroll(consumed: Offset, available: Offset, source: NestedScrollSource): Offset {
+                    return Offset.Zero
+                }
             }
         }
         

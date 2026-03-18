@@ -31,7 +31,7 @@ class HomeRepository @Inject constructor() {
             )
             emit(Resource.Success(mockData))
         } catch (e: Exception) {
-            emit(Resource.Error(e.message ?: "Unknown error occurred"))
+            emit(Resource.Error(message = e.message ?: "Unknown error occurred"))
         }
     }
 }
