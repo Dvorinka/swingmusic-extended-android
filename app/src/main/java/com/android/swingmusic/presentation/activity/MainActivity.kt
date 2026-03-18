@@ -18,13 +18,16 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.size
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
+import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.BadgedBox
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -33,6 +36,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.lifecycleScope
 import androidx.media3.session.MediaController
@@ -53,9 +57,11 @@ import com.android.swingmusic.auth.presentation.viewmodel.AuthViewModel
 import com.android.swingmusic.folder.presentation.event.FolderUiEvent
 import com.android.swingmusic.folder.presentation.screen.destinations.FoldersAndTracksScreenDestination
 import com.android.swingmusic.folder.presentation.viewmodel.FoldersViewModel
-import com.android.swingmusic.home.presentation.screen.destinations.HomeScreenDestination
-import com.android.swingmusic.library.presentation.screen.destinations.LibraryScreenDestination
-import com.android.swingmusic.lyrics.presentation.screen.destinations.LyricsScreenDestination
+import com.android.swingmusic.home.presentation.destinations.HomeDestination
+// TODO: Uncomment when library module is fixed
+// import com.android.swingmusic.library.presentation.screen.destinations.LibraryScreenDestination
+// TODO: Uncomment when lyrics module is fixed
+// import com.android.swingmusic.lyrics.presentation.screen.destinations.LyricsScreenDestination
 import com.android.swingmusic.player.presentation.screen.MiniPlayer
 import com.android.swingmusic.player.presentation.screen.destinations.NowPlayingScreenDestination
 import com.android.swingmusic.player.presentation.screen.destinations.QueueScreenDestination
@@ -67,7 +73,9 @@ import com.android.swingmusic.presentation.navigator.scaleInEnterTransition
 import com.android.swingmusic.presentation.navigator.scaleInPopEnterTransition
 import com.android.swingmusic.presentation.navigator.scaleOutExitTransition
 import com.android.swingmusic.presentation.navigator.scaleOutPopExitTransition
-import com.android.swingmusic.download.presentation.screen.destinations.DownloadScreenDestination
+// TODO: Uncomment when download module is fixed
+// import com.android.swingmusic.download.presentation.screen.destinations.DownloadScreenDestination
+import com.android.swingmusic.search.presentation.event.SearchUiEvent
 import com.android.swingmusic.search.presentation.screen.destinations.SearchScreenDestination
 import com.android.swingmusic.search.presentation.screen.destinations.ViewAllSearchResultsDestination
 import com.android.swingmusic.search.presentation.viewmodel.SearchViewModel
@@ -136,8 +144,9 @@ class MainActivity : ComponentActivity() {
                 LoginWithUsernameScreenDestination,
                 LoginWithQrCodeDestination,
                 NowPlayingScreenDestination,
-                QueueScreenDestination,
-                LyricsScreenDestination
+                QueueScreenDestination
+                // TODO: Uncomment when lyrics module is fixed
+                // LyricsScreenDestination
             )
 
             val showBottomNav =
@@ -146,29 +155,33 @@ class MainActivity : ComponentActivity() {
             val bottomNavItems: List<BottomNavItem> = listOf(
                 BottomNavItem.Home,
                 BottomNavItem.Search,
-                BottomNavItem.Library,
-                BottomNavItem.Downloads,
+                // TODO: Uncomment when library module is fixed
+                // BottomNavItem.Library,
+                // TODO: Uncomment when download module is fixed
+                // BottomNavItem.Downloads,
             )
 
             // Map of BottomNavItem to their route prefixes
             val bottomNavRoutePrefixes = mapOf(
-                BottomNavItem.Home to listOf(HomeScreenDestination.route),
+                BottomNavItem.Home to listOf(HomeDestination.route),
                 BottomNavItem.Search to listOf(
                     SearchScreenDestination.route,
                     ViewAllSearchResultsDestination.route
-                ),
-                BottomNavItem.Library to listOf(
-                    LibraryScreenDestination.route,
-                    FoldersAndTracksScreenDestination.route,
-                    AllAlbumScreenDestination.route,
-                    AlbumWithInfoScreenDestination.route,
-                    AllArtistsScreenDestination.route,
-                    ArtistInfoScreenDestination.route,
-                    ViewAllScreenOnArtistDestination.route
-                ),
-                BottomNavItem.Downloads to listOf(
-                    DownloadScreenDestination.route
                 )
+                // TODO: Uncomment when library module is fixed
+                // BottomNavItem.Library to listOf(
+                //     LibraryScreenDestination.route,
+                //     FoldersAndTracksScreenDestination.route,
+                //     AllAlbumScreenDestination.route,
+                //     AlbumWithInfoScreenDestination.route,
+                //     AllArtistsScreenDestination.route,
+                //     ArtistInfoScreenDestination.route,
+                //     ViewAllScreenOnArtistDestination.route
+                // ),
+                // TODO: Uncomment when download module is fixed
+                // BottomNavItem.Downloads to listOf(
+                //     DownloadScreenDestination.route
+                // )
             )
 
 
@@ -221,7 +234,7 @@ class MainActivity : ComponentActivity() {
                                                     BadgedBox(
                                                         badge = {
                                                             // Show download badge if there are active downloads
-                                                            if (item == BottomNavItem.Downloads) {
+                                                            if (item == BottomNavItem.Home) {
                                                                 // TODO: Add download count badge
                                                             }
                                                         }
@@ -242,7 +255,7 @@ class MainActivity : ComponentActivity() {
                                                 label = { 
                                                     Text(
                                                         text = item.title,
-                                                        style = MaterialTheme.typography.caption,
+                                                        style = MaterialTheme.typography.bodySmall,
                                                         fontWeight = if (navController.currentDestination?.route?.let { route ->
                                                             bottomNavRoutePrefixes[item]?.any { prefix ->
                                                                 route.startsWith(prefix)

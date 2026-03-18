@@ -37,3 +37,7 @@ include(":feature:album")
 include(":feature:common")
 include(":feature:search")
 include(":feature:settings")
+// TODO: Add back when library, lyrics, and download modules are fixed
+// include(":feature:library")
+// include(":feature:lyrics")
+// include(":feature:download")

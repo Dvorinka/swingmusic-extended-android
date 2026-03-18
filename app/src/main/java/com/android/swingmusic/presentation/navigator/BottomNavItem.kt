@@ -5,9 +5,11 @@ import com.android.swingmusic.album.presentation.screen.destinations.AllAlbumScr
 import com.android.swingmusic.artist.presentation.screen.destinations.AllArtistsScreenDestination
 import com.android.swingmusic.folder.presentation.screen.destinations.FoldersAndTracksScreenDestination
 import com.android.swingmusic.search.presentation.screen.destinations.SearchScreenDestination
-import com.android.swingmusic.home.presentation.screen.destinations.HomeScreenDestination
-import com.android.swingmusic.library.presentation.screen.destinations.LibraryScreenDestination
-import com.android.swingmusic.download.presentation.screen.destinations.DownloadScreenDestination
+import com.android.swingmusic.home.presentation.destinations.HomeDestination
+// TODO: Uncomment when library module is fixed
+// import com.android.swingmusic.library.presentation.screen.destinations.LibraryScreenDestination
+// TODO: Uncomment when download module is fixed
+// import com.android.swingmusic.download.presentation.screen.destinations.DownloadScreenDestination
 import com.ramcosta.composedestinations.spec.DestinationSpec
 import com.android.swingmusic.uicomponent.R as UiComponent
 
@@ -19,7 +21,7 @@ sealed class BottomNavItem(
     data object Home : BottomNavItem(
         title = "Home",
         icon = UiComponent.drawable.ic_home,
-        destination = HomeScreenDestination
+        destination = HomeDestination
     )
 
     data object Search : BottomNavItem(
@@ -28,17 +30,19 @@ sealed class BottomNavItem(
         destination = SearchScreenDestination
     )
 
-    data object Library : BottomNavItem(
-        title = "Your Library",
-        icon = UiComponent.drawable.ic_library,
-        destination = LibraryScreenDestination
-    )
+    // TODO: Uncomment when library module is fixed
+    // data object Library : BottomNavItem(
+    //     title = "Your Library",
+    //     icon = UiComponent.drawable.ic_library,
+    //     destination = LibraryScreenDestination
+    // )
 
-    data object Downloads : BottomNavItem(
-        title = "Downloads",
-        icon = UiComponent.drawable.ic_download,
-        destination = DownloadScreenDestination
-    )
+    // TODO: Uncomment when download module is fixed
+    // data object Downloads : BottomNavItem(
+    //     title = "Downloads",
+    //     icon = UiComponent.drawable.ic_download,
+    //     destination = DownloadScreenDestination
+    // )
 
     // Legacy items - can be accessed through Library
     data object Folder : BottomNavItem(

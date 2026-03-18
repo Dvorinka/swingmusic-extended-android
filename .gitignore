@@ -1,14 +1,107 @@
-*.iml
-.gradle
-/local.properties
-/.idea
-.DS_Store
-/build
-/captures
-/app/release
-.externalNativeBuild
-.cxx
-local.properties
+# Gradle
+.gradle/
+build/
+!gradle/wrapper/gradle-wrapper.jar
+!gradle/wrapper/gradle-wrapper.properties
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+# Android specific
+*.apk
+*.ap_
+*.aab
+*.dex
+*.class
+bin/
+gen/
+out/
+debug/
+release/
+
+# Keystore files
+*.jks
 *.keystore
 keystore-base64.txt
-/.kotlin/sessions
+
+# Google Services (e.g. APIs or Firebase)
+google-services.json
+
+# Android Profiling
+*.hprof
+
+# IntelliJ
+*.iml
+.idea/workspace.xml
+.idea/tasks.xml
+.idea/gradle.xml
+.idea/assetWizardSettings.xml
+.idea/dictionaries
+.idea/libraries
+.idea/caches
+.idea/modules.xml
+.idea/.name
+.idea/compiler.xml
+.idea/copyright/profiles_settings.xml
+.idea/encodings.xml
+.idea/misc.xml
+.idea/modules.xml
+.idea/scopes/scope_settings.xml
+.idea/vcs.xml
+.idea/jsLibraryMappings.xml
+.idea/datasources.xml
+.idea/dataSources.ids
+.idea/sqlDataSources.xml
+.idea/dynamic.xml
+.idea/uiDesigner.xml
+
+# OS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Editor
+.vscode/
+*.swp
+*.swo
+*~
+
+# Logs
+*.log
+
+# Local configuration file
+local.properties
+
+# Proguard
+proguard-rules.pro
+*.pro
+
+# Build outputs
+/app/build/
+/feature/*/build/
+/core/build/
+/app/release
+/captures
+
+# Navigation generated files
+**/build/intermediates/navigation_json/
+
+# External libraries
+
+# NDK
+obj/
+.externalNativeBuild
+.cxx
+
+# Kotlin
+.kotlin/sessions
+
+# Temporary files
+*.tmp
+*.temp
+
+# Cache
+.cache/

@@ -81,6 +81,10 @@ dependencies {
     implementation(project(":feature:album"))
     implementation(project(":feature:search"))
     implementation(project(":feature:settings"))
+    // TODO: Fix library, lyrics, and download modules
+    // implementation(project(":feature:library"))
+    // implementation(project(":feature:lyrics"))
+    // implementation(project(":feature:download"))
     // Common Feature
     implementation(project(":feature:common"))
 
