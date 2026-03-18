@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="Theme.SwingMusic" parent="Theme.Material3.DayNight.NoActionBar">
+    <style name="Theme.SwingMusic" parent="Theme.Material3.DayNight">
+        <!-- Remove Action Bar -->
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        
         <!-- Primary Colors -->
         <item name="colorPrimary">@color/highlight_blue</item>
         <item name="colorOnPrimary">@color/white</item>

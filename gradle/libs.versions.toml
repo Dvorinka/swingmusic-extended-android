@@ -4,6 +4,12 @@ compileSdk = "36"
 minSdk = "26"
 targetSdk = "36"
 
+# Material3
+material3 = "1.2.1"
+
+# Material Components
+material = "1.12.0"
+
 # Plugin Versions
 agp = "8.9.1"
 kotlin = "2.1.0"
@@ -148,6 +154,9 @@ qr-kit = { group = "network.chaintech", name = "qr-kit", version.ref = "qrKit" }
 chucker-library = { group = "com.github.chuckerteam.chucker", name = "library", version.ref = "chucker" }
 chucker-library-no-op = { group = "com.github.chuckerteam.chucker", name = "library-no-op", version.ref = "chucker" }
 wavy-slider = { group = "ir.mahozad.multiplatform", name = "wavy-slider", version.ref = "wavySlider" }
+
+# Material Components
+material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
